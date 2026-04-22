@@ -31,7 +31,7 @@ Personal portfolio website showcasing my skills, projects, and experience as a *
 ## Contact
 
 Email: somgupta0011@gmail.com  
-LinkedIn: https://www.linkedin.com/in/som-gupta-2k3/  
+LinkedIn: https://www.linkedin.com/in/somguptaa/  
 GitHub: https://github.com/somguptaa
 
 ---
