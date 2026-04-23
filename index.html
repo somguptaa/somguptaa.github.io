@@ -13,7 +13,7 @@
   --text:#E8EDF2;--text2:#8A95A3;--text3:#4E5A6A;
   --accent:#00D4AA;--accent2:#3B82F6;--accent3:#F59E0B;
   --accent-dim:rgba(0,212,170,0.1);--accent2-dim:rgba(59,130,246,0.1);
-  --gold:#F5C518;--red:#EF4444;
+  --gold:#F5C518;
   --ff-h:'Syne',sans-serif;--ff-b:'DM Sans',sans-serif;--ff-m:'JetBrains Mono',monospace;
   --max:1160px;--ease:cubic-bezier(.4,0,.2,1);
 }
@@ -53,7 +53,7 @@ nav.stuck{background:rgba(8,11,16,.92);border-bottom:1px solid var(--border);bac
 .m-panel{position:fixed;top:0;right:-300px;width:260px;height:100%;background:var(--surface);border-left:1px solid var(--border);z-index:1001;padding:2rem 1.5rem;transition:right .3s var(--ease)}
 .m-panel.on{right:0}
 .m-close{position:absolute;top:1.25rem;right:1.25rem;background:none;border:none;color:var(--text2);font-size:1.4rem;cursor:pointer;line-height:1}
-.m-panel a{font-family:var(--ff-m);font-size:.8rem;color:var(--text);display:block;margin-bottom:1.25rem;letter-spacing:.05em;margin-top:3.5rem;transition:color .2s}
+.m-panel a{font-family:var(--ff-m);font-size:.8rem;color:var(--text);display:block;margin-bottom:1.25rem;letter-spacing:.05em;transition:color .2s}
 .m-panel a:first-of-type{margin-top:3.5rem}
 .m-panel a:hover{color:var(--accent)}
 
@@ -123,20 +123,35 @@ nav.stuck{background:rgba(8,11,16,.92);border-bottom:1px solid var(--border);bac
 
 /* ═══ PROJECTS ═══ */
 .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:1.5rem;margin-top:3rem}
+
+/* Regular project card */
 .p-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.875rem;display:flex;flex-direction:column;transition:all .3s var(--ease);position:relative;overflow:hidden}
 .p-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,212,170,.04) 0%,transparent 55%);opacity:0;transition:opacity .3s;pointer-events:none}
 .p-card:hover{border-color:rgba(0,212,170,.28);transform:translateY(-5px);box-shadow:0 24px 64px rgba(0,0,0,.45)}
 .p-card:hover::before{opacity:1}
-.p-card.span2{grid-column:span 2}
+
+/* ── FEATURED CARD FIX ── */
+/* Spans both columns */
+.p-card.featured{grid-column:1 / -1}
+/* On desktop: split content into two columns inside the card */
+.p-card.featured .feat-inner{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2rem;
+  margin-top:.5rem;
+}
+.feat-left{}
+.feat-right{display:flex;flex-direction:column;justify-content:space-between}
+
 .p-num{font-family:var(--ff-m);font-size:.6rem;letter-spacing:.1em;color:var(--text3);margin-bottom:.75rem;text-transform:uppercase}
 .p-title{font-family:var(--ff-h);font-size:1.25rem;font-weight:700;letter-spacing:-.015em;margin-bottom:.75rem;line-height:1.2}
-.p-desc{color:var(--text2);font-size:.9rem;line-height:1.75;margin-bottom:1.125rem;flex:1}
-.p-feats{list-style:none;margin-bottom:1.375rem}
+.p-desc{color:var(--text2);font-size:.9rem;line-height:1.75;margin-bottom:1.125rem}
+.p-feats{list-style:none;margin-bottom:1.25rem}
 .p-feats li{font-size:.83rem;color:var(--text2);padding:.28rem 0 .28rem 1.2rem;position:relative;line-height:1.55}
 .p-feats li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:.78rem;font-family:var(--ff-m)}
 .p-stack{display:flex;flex-wrap:wrap;gap:.375rem;margin-bottom:1.375rem}
 .ptag{font-family:var(--ff-m);font-size:.6rem;padding:.22rem .55rem;background:var(--accent2-dim);border:1px solid rgba(59,130,246,.2);border-radius:4px;color:var(--accent2);letter-spacing:.03em}
-.p-links{display:flex;gap:.625rem;margin-top:auto;flex-wrap:wrap;align-items:center}
+.p-links{display:flex;gap:.625rem;flex-wrap:wrap;align-items:center}
 .pl{font-family:var(--ff-m);font-size:.68rem;letter-spacing:.04em;padding:.45rem .9rem;border-radius:6px;transition:all .2s;display:inline-flex;align-items:center;gap:.35rem}
 .pl.solid{background:var(--accent);color:#000;font-weight:500}
 .pl.solid:hover{background:#00bfa3}
@@ -165,11 +180,9 @@ nav.stuck{background:rgba(8,11,16,.92);border-bottom:1px solid var(--border);bac
 .tl-org{font-family:var(--ff-m);font-size:.7rem;color:var(--accent);letter-spacing:.04em;margin-bottom:.4rem}
 .tl-period{font-family:var(--ff-m);font-size:.65rem;color:var(--text3);letter-spacing:.06em;margin-bottom:.7rem}
 .tl-desc{color:var(--text2);font-size:.9rem;line-height:1.75}
-.tl-desc ul{margin-top:.5rem;padding-left:1rem}
-.tl-desc li{margin-bottom:.3rem}
 
 /* ═══ CERTIFICATIONS ═══ */
-.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.125rem;margin-top:3rem}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.125rem;margin-top:3rem}
 .cert-c{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:1.5rem;display:flex;gap:.875rem;align-items:flex-start;transition:all .3s;position:relative;overflow:hidden}
 .cert-c:hover{border-color:var(--border-light);transform:translateY(-3px)}
 .cert-c.verified{border-color:rgba(0,212,170,.2)}
@@ -178,9 +191,12 @@ nav.stuck{background:rgba(8,11,16,.92);border-bottom:1px solid var(--border);bac
 .cert-ico.blue{background:var(--accent2-dim);color:var(--accent2)}
 .cert-ico.teal{background:var(--accent-dim);color:var(--accent)}
 .cert-ico.gold{background:rgba(245,197,24,.1);color:var(--gold)}
+.cert-body{flex:1;min-width:0}
 .cert-title{font-family:var(--ff-h);font-size:.95rem;font-weight:700;margin-bottom:.2rem;line-height:1.3;padding-right:3.5rem}
-.cert-issuer{font-size:.8rem;color:var(--text2);margin-bottom:.15rem}
-.cert-date{font-family:var(--ff-m);font-size:.6rem;color:var(--text3);letter-spacing:.04em}
+.cert-issuer{font-size:.8rem;color:var(--text2);margin-bottom:.2rem}
+.cert-date{font-family:var(--ff-m);font-size:.6rem;color:var(--text3);letter-spacing:.04em;margin-bottom:.75rem}
+.cert-link{font-family:var(--ff-m);font-size:.65rem;letter-spacing:.04em;padding:.4rem .85rem;border-radius:6px;background:var(--accent);color:#000;font-weight:500;display:inline-flex;align-items:center;gap:.3rem;transition:all .2s}
+.cert-link:hover{background:#00bfa3}
 
 /* ═══ CONTACT ═══ */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:4rem;align-items:start}
@@ -239,8 +255,9 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3.5rem 2
   .hero-inner{grid-template-columns:1fr}
   .h-stats{display:none}
   .about-grid,.contact-grid{grid-template-columns:1fr}
-  .p-card.span2{grid-column:span 1}
   .ft-top{grid-template-columns:1fr 1fr}
+  /* Featured card: single column on tablet */
+  .p-card.featured .feat-inner{grid-template-columns:1fr}
 }
 @media(max-width:768px){
   .n-links{display:none}.hbg{display:flex}
@@ -249,6 +266,8 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3.5rem 2
   .proj-grid{grid-template-columns:1fr}
   .ft-top{grid-template-columns:1fr}
   .ft-bot{flex-direction:column;gap:.65rem;text-align:center}
+  /* Featured card: already single column */
+  .p-card.featured .feat-inner{grid-template-columns:1fr}
 }
 @media(max-width:480px){
   .h-name{font-size:3rem}
@@ -262,7 +281,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3.5rem 2
 
 <div class="loader" id="loader"><div class="loader-ring"></div></div>
 
-<!-- ═ NAV ═ -->
+<!-- NAV -->
 <nav id="nav">
   <a href="#" class="n-logo">som<em>.</em>gupta</a>
   <ul class="n-links">
@@ -280,7 +299,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3.5rem 2
   </div>
 </nav>
 
-<!-- ═ MOBILE MENU ═ -->
+<!-- MOBILE MENU -->
 <div class="m-ov" id="mOv"></div>
 <div class="m-panel" id="mPanel">
   <button class="m-close" id="mClose">×</button>
@@ -293,7 +312,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3.5rem 2
   <a href="#contact" class="ml">Contact</a>
 </div>
 
-<!-- ═ HERO ═ -->
+<!-- HERO -->
 <section class="hero">
   <div class="h-grid"></div>
   <div class="h-orb h-orb1"></div>
@@ -324,30 +343,15 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3.5rem 2
       </div>
     </div>
     <div class="h-stats">
-      <div>
-        <div class="h-stat-n">10<em>+</em></div>
-        <div class="h-stat-l">REST APIs Built</div>
-        <div class="h-stat-div"></div>
-      </div>
-      <div>
-        <div class="h-stat-n">5<em>+</em></div>
-        <div class="h-stat-l">Projects Shipped</div>
-        <div class="h-stat-div"></div>
-      </div>
-      <div>
-        <div class="h-stat-n">8.4</div>
-        <div class="h-stat-l">CGPA (BCA)</div>
-        <div class="h-stat-div"></div>
-      </div>
-      <div>
-        <div class="h-stat-n">2<em>+</em></div>
-        <div class="h-stat-l">Certifications</div>
-      </div>
+      <div><div class="h-stat-n">10<em>+</em></div><div class="h-stat-l">REST APIs Built</div><div class="h-stat-div"></div></div>
+      <div><div class="h-stat-n">5<em>+</em></div><div class="h-stat-l">Projects Shipped</div><div class="h-stat-div"></div></div>
+      <div><div class="h-stat-n">8.4</div><div class="h-stat-l">CGPA (BCA)</div><div class="h-stat-div"></div></div>
+      <div><div class="h-stat-n">5<em>+</em></div><div class="h-stat-l">Certifications</div></div>
     </div>
   </div>
 </section>
 
-<!-- ═ ABOUT ═ -->
+<!-- ABOUT -->
 <section id="about" class="sec reveal">
   <div class="sec-in">
     <div class="sec-eye">01 — About</div>
@@ -355,7 +359,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3.5rem 2
     <div class="about-grid">
       <div class="about-body">
         <p>I'm a Java Backend Developer specializing in building REST APIs using Java and Spring Boot. I focus on designing clean layered architectures, handling validation properly, and implementing structured exception handling.</p>
-        <p>I've built backend systems with real-world business logic — including order lifecycle management and hybrid SQL/NoSQL data models. Currently in advanced training at Naresh i Technologies, Hyderabad, deepening my expertise in microservices and enterprise application development.</p>
+        <p>I've built backend systems with real-world business logic — including order lifecycle management and hybrid SQL/NoSQL data models. Currently in advanced training at Naresh i Technologies, Hyderabad, deepening expertise in microservices and enterprise application development.</p>
         <p>I care deeply about code quality: consistent error responses, proper DTO patterns, API documentation, and keeping business logic fully decoupled from persistence layers.</p>
         <div class="about-chips">
           <span class="chip">BCA Graduate 2025</span>
@@ -372,14 +376,14 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3.5rem 2
         </div>
         <div class="stat-row">
           <div class="s-box"><div class="s-box-n">8.4</div><div class="s-box-l">CGPA (BCA)</div></div>
-          <div class="s-box"><div class="s-box-n">2+</div><div class="s-box-l">Certifications</div></div>
+          <div class="s-box"><div class="s-box-n">5+</div><div class="s-box-l">Certifications</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═ SKILLS ═ -->
+<!-- SKILLS -->
 <section id="skills" class="sec sec-alt reveal">
   <div class="sec-in">
     <div class="sec-eye">02 — Skills</div>
@@ -426,7 +430,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3.5rem 2
   </div>
 </section>
 
-<!-- ═ PROJECTS ═ -->
+<!-- PROJECTS -->
 <section id="projects" class="sec reveal">
   <div class="sec-in">
     <div class="sec-eye">03 — Projects</div>
@@ -434,22 +438,33 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3.5rem 2
     <p class="sec-sub">Real-world backend systems with production-quality architecture, validation, and API design.</p>
     <div class="proj-grid">
 
-      <!-- FEATURED: Food Order Management -->
-      <div class="p-card span2">
+      <!-- ★ FEATURED: Full width, two-column internal layout -->
+      <div class="p-card featured">
         <div class="p-num">Project 01 · Full Stack · Featured</div>
         <h3 class="p-title">Food Order Management System</h3>
-        <p class="p-desc">Full-stack application with a Spring Boot REST API backend and a dark-theme single-page frontend served via Spring Boot static resources — no external JS framework. Implements a strict 5-stage order lifecycle with domain-level enforcement and comprehensive validation.</p>
-        <ul class="p-feats">
-          <li>6+ RESTful APIs covering full CRUD and a PATCH status endpoint enforcing a 5-stage order lifecycle: PENDING → CONFIRMED → PREPARING → DELIVERED / CANCELLED</li>
-          <li>Enum-level <code>canTransitionTo()</code> guards rejecting illegal state changes with structured 409 Conflict responses — enforcing real-world business rules at the domain layer</li>
-          <li>Bean Validation (<code>@Valid</code>, <code>@NotBlank</code>, <code>@Min</code>, <code>@Positive</code>) with a <code>RestControllerAdvice</code> Global Exception Handler returning field-level errors on every 400 response</li>
-          <li>All REST endpoints documented using SpringDoc OpenAPI with Swagger UI for interactive testing and clear API contract visibility</li>
-        </ul>
-        <div class="p-stack">
-          <span class="ptag">Java</span><span class="ptag">Spring Boot</span><span class="ptag">Spring Data JPA</span><span class="ptag">MySQL</span><span class="ptag">Lombok</span><span class="ptag">SpringDoc OpenAPI</span><span class="ptag">HTML5</span><span class="ptag">CSS3</span><span class="ptag">JavaScript</span>
-        </div>
-        <div class="p-links">
-         <a href="https://github.com/somguptaa/FoodOrderManagementSystem" target="_blank" class="pl solid">View Code ↗</a>
+        <!-- Two-column inner layout fills the wide card properly -->
+        <div class="feat-inner">
+          <div class="feat-left">
+            <p class="p-desc">Full-stack application with a Spring Boot REST API backend and a dark-theme single-page frontend served via Spring Boot static resources — no external JS framework required. Implements a strict 5-stage order lifecycle with domain-level enforcement.</p>
+            <ul class="p-feats">
+              <li>6+ RESTful APIs covering full CRUD and a PATCH status endpoint enforcing 5-stage order lifecycle: PENDING → CONFIRMED → PREPARING → DELIVERED / CANCELLED</li>
+              <li>Enum-level <code>canTransitionTo()</code> guards rejecting illegal state changes with structured 409 Conflict responses — enforcing real-world business rules at the domain layer</li>
+            </ul>
+          </div>
+          <div class="feat-right">
+            <ul class="p-feats">
+              <li>Bean Validation (<code>@Valid</code>, <code>@NotBlank</code>, <code>@Min</code>, <code>@Positive</code>) with a <code>RestControllerAdvice</code> Global Exception Handler returning field-level errors on every 400 response</li>
+              <li>All REST endpoints documented using SpringDoc OpenAPI with Swagger UI for interactive testing and clear API contract visibility</li>
+            </ul>
+            <div>
+              <div class="p-stack" style="margin-top:.75rem">
+                <span class="ptag">Java</span><span class="ptag">Spring Boot</span><span class="ptag">Spring Data JPA</span><span class="ptag">MySQL</span><span class="ptag">Lombok</span><span class="ptag">SpringDoc OpenAPI</span><span class="ptag">HTML5</span><span class="ptag">CSS3</span><span class="ptag">JavaScript</span>
+              </div>
+              <div class="p-links">
+                <a href="https://github.com/somguptaa/FoodOrderManagementSystem" target="_blank" class="pl solid">View Code ↗</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -530,38 +545,22 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3.5rem 2
   </div>
 </section>
 
-<!-- ═ GITHUB STATS ═ -->
+<!-- GITHUB STATS -->
 <section class="sec gh-wrap reveal">
   <div class="sec-in">
     <div class="sec-eye">04 — Activity</div>
     <h2 class="sec-h">GitHub Activity</h2>
     <p class="sec-sub">Consistent backend projects implementing REST APIs, database integration, and layered architecture.</p>
     <div class="gh-row">
-      <div class="gh-c">
-        <div class="gh-ic">&lt;/&gt;</div>
-        <div class="gh-n">8<em>+</em></div>
-        <div class="gh-l">Public Repos</div>
-      </div>
-      <div class="gh-c">
-        <div class="gh-ic">⚡</div>
-        <div class="gh-n">100<em>+</em></div>
-        <div class="gh-l">Commits This Year</div>
-      </div>
-      <div class="gh-c">
-        <div class="gh-ic">★</div>
-        <div class="gh-n">5<em>+</em></div>
-        <div class="gh-l">Active Projects</div>
-      </div>
-      <div class="gh-c">
-        <div class="gh-ic">✓</div>
-        <div class="gh-n">2<em>+</em></div>
-        <div class="gh-l">Certifications</div>
-      </div>
+      <div class="gh-c"><div class="gh-ic">&lt;/&gt;</div><div class="gh-n">8<em>+</em></div><div class="gh-l">Public Repos</div></div>
+      <div class="gh-c"><div class="gh-ic">⚡</div><div class="gh-n">100<em>+</em></div><div class="gh-l">Commits This Year</div></div>
+      <div class="gh-c"><div class="gh-ic">★</div><div class="gh-n">5<em>+</em></div><div class="gh-l">Active Projects</div></div>
+      <div class="gh-c"><div class="gh-ic">✓</div><div class="gh-n">5<em>+</em></div><div class="gh-l">Certifications</div></div>
     </div>
   </div>
 </section>
 
-<!-- ═ EXPERIENCE ═ -->
+<!-- EXPERIENCE -->
 <section id="experience" class="sec reveal">
   <div class="sec-in">
     <div class="sec-eye">05 — Experience</div>
@@ -587,7 +586,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3.5rem 2
   </div>
 </section>
 
-<!-- ═ EDUCATION ═ -->
+<!-- EDUCATION -->
 <section id="education" class="sec sec-alt reveal">
   <div class="sec-in">
     <div class="sec-eye">06 — Education</div>
@@ -605,115 +604,78 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3.5rem 2
   </div>
 </section>
 
-<!-- ═ CERTIFICATIONS ═ -->
+<!-- CERTIFICATIONS -->
 <section id="certifications" class="sec reveal">
   <div class="sec-in">
     <div class="sec-eye">07 — Certifications</div>
     <h2 class="sec-h">Certifications & Learning</h2>
-    <p class="sec-sub">Verified credentials alongside continuous hands-on learning and project development.</p>
+    <p class="sec-sub">Verified credentials from Infosys Springboard and HackerRank alongside continuous hands-on learning.</p>
     <div class="cert-grid">
 
-      <!-- Infosys Springboard Java Developer-->
       <div class="cert-c verified">
         <div class="cert-ico blue">IS</div>
-        <div>
+        <div class="cert-body">
           <div class="cert-title">Java Developer Certification</div>
           <div class="cert-issuer">Infosys Springboard</div>
           <div class="cert-date">April 2026</div>
-           <div class="cert-links">
-          <a href="https://infyspringboard.onwingspan.com/public-assets/infosysheadstart/cert/lex_auth_013193384540020736264_shared/c83aede6-9351-4f11-aaa9-48c5cfcd17fd.pdf" target="_blank" class="pl solid">View Credentials ↗</a>
-        </div>
-          
+          <a href="https://infyspringboard.onwingspan.com/public-assets/infosysheadstart/cert/lex_auth_013193384540020736264_shared/c83aede6-9351-4f11-aaa9-48c5cfcd17fd.pdf" target="_blank" class="cert-link">View Credential ↗</a>
         </div>
       </div>
 
-      <!-- HackerRank Software Engineer Intern-->
       <div class="cert-c verified">
         <div class="cert-ico gold">HR</div>
-        <div>
+        <div class="cert-body">
           <div class="cert-title">Software Engineer Intern</div>
           <div class="cert-issuer">HackerRank</div>
           <div class="cert-date">April 2026</div>
-          <div class="cert-links">
-          <a href="https://www.hackerrank.com/certificates/iframe/6866d9a54d9d" target="_blank" class="pl solid">View Credentials ↗</a>
-        </div>
+          <a href="https://www.hackerrank.com/certificates/iframe/6866d9a54d9d" target="_blank" class="cert-link">View Credential ↗</a>
         </div>
       </div>
 
-       <!-- Infosys Springboard Java Foundation Certification-->
       <div class="cert-c verified">
         <div class="cert-ico blue">IS</div>
-        <div>
+        <div class="cert-body">
           <div class="cert-title">Java Foundation Certification</div>
           <div class="cert-issuer">Infosys Springboard</div>
           <div class="cert-date">April 2026</div>
-           <div class="cert-links">
-          <a href="https://infyspringboard.onwingspan.com/public-assets/infosysheadstart/cert/lex_auth_013788171933728768154_shared/9c40ff98-b8cb-48ad-80c8-8fc3eb08fa0d.pdf" target="_blank" class="pl solid">View Credentials ↗</a>
-        </div>
-          </div>
-        </div>
-
-           <!-- HackerRank SQL (Intermediate) Certification-->
-      <div class="cert-c verified">
-        <div class="cert-ico gold">HR</div>
-        <div>
-          <div class="cert-title">SQL (Intermediate) Certification</div>
-          <div class="cert-issuer">HackerRank</div>
-          <div class="cert-date">March 2026</div>
-          <div class="cert-links">
-          <a href="https://www.hackerrank.com/certificates/iframe/00e7b017012f" target="_blank" class="pl solid">View Credentials ↗</a>
-        </div>
+          <a href="https://infyspringboard.onwingspan.com/public-assets/infosysheadstart/cert/lex_auth_013788171933728768154_shared/9c40ff98-b8cb-48ad-80c8-8fc3eb08fa0d.pdf" target="_blank" class="cert-link">View Credential ↗</a>
         </div>
       </div>
 
-             <!-- Infosys Springboard Java Spring Boot Certification-->
+      <div class="cert-c verified">
+        <div class="cert-ico gold">HR</div>
+        <div class="cert-body">
+          <div class="cert-title">SQL (Intermediate) Certification</div>
+          <div class="cert-issuer">HackerRank</div>
+          <div class="cert-date">March 2026</div>
+          <a href="https://www.hackerrank.com/certificates/iframe/00e7b017012f" target="_blank" class="cert-link">View Credential ↗</a>
+        </div>
+      </div>
+
       <div class="cert-c verified">
         <div class="cert-ico blue">IS</div>
-        <div>
+        <div class="cert-body">
           <div class="cert-title">Java Spring Boot Certification</div>
           <div class="cert-issuer">Infosys Springboard</div>
           <div class="cert-date">March 2026</div>
-           <div class="cert-links">
-          <a href="https://infyspringboard.onwingspan.com/public-assets/infosysheadstart/cert/lex_auth_01384265689336217620788_shared/b781d13c-ee7a-4096-b78a-53db4cad0317.pdf" target="_blank" class="pl solid">View Credentials ↗</a>
+          <a href="https://infyspringboard.onwingspan.com/public-assets/infosysheadstart/cert/lex_auth_01384265689336217620788_shared/b781d13c-ee7a-4096-b78a-53db4cad0317.pdf" target="_blank" class="cert-link">View Credential ↗</a>
         </div>
-          </div>
-        </div>
-          
-      <!-- Naresh i Tech Training -->
+      </div>
+
       <div class="cert-c">
         <div class="cert-ico teal">NT</div>
-        <div>
+        <div class="cert-body">
           <div class="cert-title">Full Stack Java Developer Training</div>
           <div class="cert-issuer">Naresh i Technologies · Hyderabad</div>
           <div class="cert-date">2025 – Present · Advanced Program</div>
         </div>
       </div>
 
-      <!-- Spring Boot Hands-on -->
-      <div class="cert-c">
-        <div class="cert-ico teal">SB</div>
-        <div>
-          <div class="cert-title">Spring Boot & REST API Development</div>
-          <div class="cert-issuer">Hands-on Practice Projects</div>
-          <div class="cert-date">Spring Boot · JPA · Security · WebFlux</div>
-        </div>
-      </div>
-
-      <!-- Database -->
-      <div class="cert-c">
-        <div class="cert-ico blue">DB</div>
-        <div>
-          <div class="cert-title">Database Design & Integration</div>
-          <div class="cert-issuer">MySQL · PostgreSQL · MongoDB</div>
-          <div class="cert-date">SQL & NoSQL · Hybrid Architecture</div>
-        </div>
-      
-
     </div>
   </div>
 </section>
 
-<!-- ═ CONTACT ═ -->
+<!-- CONTACT -->
 <section id="contact" class="sec sec-alt reveal">
   <div class="sec-in">
     <div class="sec-eye">08 — Contact</div>
@@ -752,7 +714,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3.5rem 2
   </div>
 </section>
 
-<!-- ═ FOOTER ═ -->
+<!-- FOOTER -->
 <footer>
   <div class="ft-in">
     <div class="ft-top">
@@ -792,10 +754,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:3.5rem 2
 <button class="s-top" id="sTop" aria-label="Back to top">↑</button>
 
 <script>
-// Loader
 window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('done'),400));
-
-// Theme
 const html=document.documentElement;
 const thBtn=document.getElementById('thBtn');
 const saved=localStorage.getItem('sg-theme')||'dark';
@@ -807,8 +766,6 @@ thBtn.addEventListener('click',()=>{
   thBtn.textContent=t==='dark'?'🌙':'☀️';
   localStorage.setItem('sg-theme',t);
 });
-
-// Typing animation
 const roles=['Java Backend Developer','Spring Boot Specialist','Full Stack Developer','REST API Engineer','Backend Engineer'];
 let wi=0,ci=0,del=false;
 const tel=document.getElementById('typingEl');
@@ -821,8 +778,6 @@ function type(){
   setTimeout(type,del?42:90);
 }
 type();
-
-// Nav
 const nav=document.getElementById('nav');
 const sTop=document.getElementById('sTop');
 window.addEventListener('scroll',()=>{
@@ -830,28 +785,22 @@ window.addEventListener('scroll',()=>{
   sTop.classList.toggle('on',window.scrollY>400);
 });
 sTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-
-// Mobile menu
 const mOv=document.getElementById('mOv');
 const mPanel=document.getElementById('mPanel');
 const hbg=document.getElementById('hbg');
 const mClose=document.getElementById('mClose');
-const open=()=>{mPanel.classList.add('on');mOv.classList.add('on');document.body.style.overflow='hidden'};
-const close=()=>{mPanel.classList.remove('on');mOv.classList.remove('on');document.body.style.overflow=''};
-hbg.addEventListener('click',open);
-mClose.addEventListener('click',close);
-mOv.addEventListener('click',close);
-document.querySelectorAll('.ml').forEach(a=>a.addEventListener('click',close));
-
-// Smooth scroll
+const openM=()=>{mPanel.classList.add('on');mOv.classList.add('on');document.body.style.overflow='hidden'};
+const closeM=()=>{mPanel.classList.remove('on');mOv.classList.remove('on');document.body.style.overflow=''};
+hbg.addEventListener('click',openM);
+mClose.addEventListener('click',closeM);
+mOv.addEventListener('click',closeM);
+document.querySelectorAll('.ml').forEach(a=>a.addEventListener('click',closeM));
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
     const t=document.querySelector(a.getAttribute('href'));
     if(t){e.preventDefault();window.scrollTo({top:t.offsetTop-68,behavior:'smooth'})}
   });
 });
-
-// Reveal
 const obs=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})
 },{threshold:0.07,rootMargin:'0px 0px -50px 0px'});
